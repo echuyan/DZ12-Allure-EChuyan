@@ -1,4 +1,5 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.*;
 import org.aeonbits.owner.ConfigFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -6,13 +7,12 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.io.ByteArrayInputStream;
 import java.util.regex.Pattern;
 
 
@@ -42,6 +42,11 @@ public class OtusTest {
     разверните окно браузера на полный экран(не киоск);
     проверьте title страницы*/
     @Test
+    @Step("Check Address")
+    @Epic("Otus")
+    @Feature("Check Address")
+    @Story("Checking adress on contacts page")
+    @Description("Some description")
     public void otusContactsTest() throws Exception{
         //читаем конфиг, открываем сайт
         ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
@@ -56,6 +61,7 @@ public class OtusTest {
 
         //Считываем и сверяем адрес
         WebElement address = driver.findElement(By.ByXPath.xpath(".//div[text() = 'Адрес']/following-sibling::*"));
+
         logger.info("Адрес на странице = "+address.getText());
         String addressCheck = "125167, г. Москва, Нарышкинская аллея., д. 5, стр. 2, тел. +7 499 938-92-02";
         Assert.assertEquals(addressCheck,address.getText());
@@ -71,6 +77,11 @@ public class OtusTest {
     ввести в поле "поиск номера" 97 и начать поиск;
     дождаться появления номеров.*/
     @Test
+    @Step("Find phone number")
+    @Epic("Tele2")
+    @Feature("Find phone number")
+    @Story("Finding phone number starting with 97")
+    @Description("Some description")
     public void tele2Test() throws Exception{
         //читаем конфиг, открываем страницу
         ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
@@ -92,6 +103,7 @@ public class OtusTest {
         element.sendKeys("97");
         wait.until(ExpectedConditions.textMatches(By.ByXPath.xpath("(//span[@class='area-code'])[1]"), Pattern.compile("97.")));
 
+        Allure.addAttachment("Отображены номера", new ByteArrayInputStream(((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES)));
         //на всякий случай считываем и логируем код первого номера (действительно ли начинается с 97)
         logger.info(driver.findElement(By.ByXPath.xpath("(//span[@class='area-code'])[1]")).getText());
         }
@@ -103,6 +115,11 @@ public class OtusTest {
     "Программу курса в сжатом виде можно увидеть на странице курса после блока с преподавателями.
     Подробную программу курса можно скачать кликнув на “Скачать подробную программу курса”.*/
    @Test
+   @Step("Check course program")
+   @Epic("Otus")
+   @Feature("Check course program")
+   @Story("Checking course program description on FAQ page")
+   @Description("Some description")
     public void otusFAQTest() throws Exception{
         //читаем конфиг, открываем сайт
         ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
@@ -126,11 +143,16 @@ public class OtusTest {
     }
 
 
-   /* Зайдите на сайт https://otus.ru :
-    заполните тестовый почтовый ящик в поле "Подпишитесь на наши новости";
-    нажмите кнопку "Подписаться";
-    проверьте, что появилось сообщение: "Вы успешно подписались".*/
+       /* Зайдите на сайт https://otus.ru :
+        заполните тестовый почтовый ящик в поле "Подпишитесь на наши новости";
+        нажмите кнопку "Подписаться";
+        проверьте, что появилось сообщение: "Вы успешно подписались".*/
    @Test
+   @Step("Test Subcription")
+   @Epic("Otus")
+   @Feature("Test Subcription")
+   @Story("Trying to subcribe a test user")
+   @Description("Some description")
     public void otusSubscribeTest() throws Exception{
           //читаем конфиг, открываем сайт
         ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
