@@ -31,19 +31,19 @@ pipeline {
                   script {
 
                    // Узнаем ветку репозитория
-                                      def branch = bat(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD\n').trim().tokenize().last()
-                                      println("branch= " + branch)
+                            def branch = bat(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD\n').trim().tokenize().last()
+                            println("branch= " + branch)
 
-                                      // Достаем информацию по тестам из junit репорта
-                                      def summary = junit testResults: '**/target/surefire-reports/*.xml'
-                                      println("summary generated")
+                            // Достаем информацию по тестам из junit репорта
+                            def summary = junit testResults: '**/target/surefire-reports/*.xml'
+                            println("summary generated")
 
-                                      // Текст оповещения
-                                      def message = "${currentBuild.currentResult}: Job ${env.JOB_NAME}, build ${env.BUILD_NUMBER}, branch ${branch}\nTest Summary - ${summary.totalCount}, Failures: ${summary.failCount}, Skipped: ${summary.skipCount}, Passed: ${summary.passCount}\nMore info at: ${env.BUILD_URL}"
-                                      println("message= " + message)
+                            // Текст оповещения
+                            def message = "${currentBuild.currentResult}: Job ${env.JOB_NAME}, build ${env.BUILD_NUMBER}, branch ${branch}\nTest Summary - ${summary.totalCount}, Failures: ${summary.failCount}, Skipped: ${summary.skipCount}, Passed: ${summary.passCount}\nMore info at: ${env.BUILD_URL}"
+                            println("message= " + message)
 
                   // отсылка на почту
-                   emailext body: "[Jenkins Report] - ${env.JOB_NAME} - ${branch} - Build# ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}\nMore info at: ${env.BUILD_URL}",
+                   emailext body: "[Jenkins Report] - ${env.JOB_NAME} - ${branch} - Build# ${env.BUILD_NUMBER} - ${BUILD_STATUS}\nMore info at: ${env.BUILD_URL}",
                        subject: "[Jenkins Report] - ${env.JOB_NAME}",
                        to: 'otustestchuyan@gmail.com'
 
