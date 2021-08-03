@@ -76,7 +76,7 @@ public class OtusTest {
     /*Перейти на сайт теле2 страница https://msk.tele2.ru/shop/number :
     ввести в поле "поиск номера" 97 и начать поиск;
     дождаться появления номеров.*/
-    @Test
+  /*  @Test
     @Step("Find phone number")
     @Epic("Tele2")
     @Feature("Find phone number")
@@ -106,7 +106,7 @@ public class OtusTest {
         Allure.addAttachment("Отображены номера", new ByteArrayInputStream(((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES)));
         //на всякий случай считываем и логируем код первого номера (действительно ли начинается с 97)
         logger.info(driver.findElement(By.ByXPath.xpath("(//span[@class='area-code'])[1]")).getText());
-        }
+        }*/
 
 
     /*Перейдите на сайт https://otus.ru :
