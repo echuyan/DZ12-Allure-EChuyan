@@ -29,8 +29,9 @@ pipeline {
             post {
                 always {
                   script {
-                   emailext body: 'Test Message',
-                       subject: 'Test Subject',
+                  // отсылка на почту
+                   emailext body: "[Jenkins Report] - ${env.JOB_NAME} - Build# ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}",
+                       subject: "[Jenkins Report] - ${env.JOB_NAME} - Build# ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}",
                        to: 'otustestchuyan@gmail.com'
 
 
