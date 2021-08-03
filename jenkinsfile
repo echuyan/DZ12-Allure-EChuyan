@@ -30,8 +30,8 @@ pipeline {
                 always {
                   script {
                   // отсылка на почту
-                   emailext body: "[Jenkins Report] - ${env.JOB_NAME} - Build# ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}",
-                       subject: "[Jenkins Report] - ${env.JOB_NAME} - Build# ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}",
+                   emailext body: "[Jenkins Report] - ${env.JOB_NAME} - Build# ${env.BUILD_NUMBER} - ${env.BUILD_STATUS} - ${branch}\nTest Summary - ${summary.totalCount}, Failures: ${summary.failCount}, Skipped: ${summary.skipCount}, Passed: ${summary.passCount}\nMore info at: ${env.BUILD_URL}",
+                       subject: "[Jenkins Report] - ${env.JOB_NAME}",
                        to: 'otustestchuyan@gmail.com'
 
 
