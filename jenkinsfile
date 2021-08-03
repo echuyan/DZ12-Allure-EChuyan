@@ -29,9 +29,9 @@ pipeline {
             post {
                 always {
                   script {
-                   {
-                          emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
-                           }
+                   emailext body: 'Test Message',
+                       subject: 'Test Subject',
+                       to: 'otustestchuyan@gmail.com'
 
 
                     // Формирование отчета
