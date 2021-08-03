@@ -29,11 +29,9 @@ pipeline {
             post {
                 always {
                   script {
-                    if (currentBuild.currentResult == 'SUCCESS') {
-                    step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: "e.chuyan@gmail.com", sendToIndividuals: true])
-                    } else {
-                    step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: "e.chuyan@gmail.com", sendToIndividuals: true])
-                    }
+                   {
+                          emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+                           }
 
 
                     // Формирование отчета
