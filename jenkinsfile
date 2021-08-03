@@ -27,14 +27,13 @@ pipeline {
                 archiveArtifacts artifacts: '**/target/', fingerprint: true
             }
             post {
-               always {
-
-
-                           emailext body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
-                               recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
-                               subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
-
-                       }
+                always {
+                  script {
+                    if (currentBuild.currentResult == 'SUCCESS') {
+                    step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: "e.chuyan@gmail.com", sendToIndividuals: true])
+                    } else {
+                    step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: "e.chuyan@gmail.com", sendToIndividuals: true])
+                    }
 
 
                     // Формирование отчета
