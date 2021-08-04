@@ -43,7 +43,7 @@ pipeline {
                             println("message= " + message)
 
                   // отсылка на почту
-                   emailext body: "[Jenkins Report] - ${env.JOB_NAME} - ${env.GIT_BRANCH} - Build# ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}\nMore info at: ${env.BUILD_URL}\n Total tests count: ${summary.totalCount}\n Successfull test count: ${summary.passCount}\n Skipped tests count: ${summary.skipCount}\n Failed tests count: ${summary.failCount}",
+                   emailext body: "[Jenkins Report]\n Job name: ${env.JOB_NAME}\n Git branch: ${env.GIT_BRANCH}\n  Build number: ${env.BUILD_NUMBER}\n Status: ${env.BUILD_STATUS}\nMore info at: ${env.BUILD_URL}\n Total tests count: ${summary.totalCount}\n Successfull test count: ${summary.passCount}\n Skipped tests count: ${summary.skipCount}\n Failed tests count: ${summary.failCount}",
                        subject: "[Jenkins Report] - ${env.JOB_NAME}",
                        to: 'otustestchuyan@gmail.com'
 
