@@ -31,7 +31,7 @@ pipeline {
                   script {
 
                    // Узнаем ветку репозитория
-                            def branch = bat(returnStdout: true, script: 'git rev-parse\n').trim().tokenize().last()
+                            def branch = bat(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD\n').trim().tokenize().last()
                             println("branch= " + branch)
 
                             // Достаем информацию по тестам из junit репорта
@@ -43,7 +43,7 @@ pipeline {
                             println("message= " + message)
 
                   // отсылка на почту
-                   emailext body: "[Jenkins Report] - ${env.JOB_NAME} - ${env.BRANCH_NAME} - Build# ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}\nMore info at: ${env.BUILD_URL}\n Total tests count: ${summary.totalCount}\n Successfull test count: ${summary.passCount}\n Skipped tests count: ${summary.skipCount}\n Failed tests count: ${summary.failCount}",
+                   emailext body: "[Jenkins Report] - ${env.JOB_NAME} - ${env.GIT_BRANCH} - Build# ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}\nMore info at: ${env.BUILD_URL}\n Total tests count: ${summary.totalCount}\n Successfull test count: ${summary.passCount}\n Skipped tests count: ${summary.skipCount}\n Failed tests count: ${summary.failCount}",
                        subject: "[Jenkins Report] - ${env.JOB_NAME}",
                        to: 'otustestchuyan@gmail.com'
 
