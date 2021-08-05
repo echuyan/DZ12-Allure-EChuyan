@@ -47,7 +47,7 @@ pipeline {
                        subject: "[Jenkins Report] - ${env.JOB_NAME} - ${currentBuild.currentResult}}",
                        to: 'otustestchuyan@gmail.com'
                     //to slack
-                    slackSend(message: "Notification from Jenkins Pipeline")
+                    slackSend(message: "Notification from Jenkins Pipeline \n Job name: ${env.JOB_NAME}\n Git branch: ${env.GIT_BRANCH}\n  Build number: ${env.BUILD_NUMBER}\n Status: ${currentBuild.currentResult}\nMore info at: ${env.BUILD_URL}\n Build duration:  - ${currentBuild.durationString.replace(' and counting', '')}\n Total tests count: ${summary.totalCount}\n Successfull test count: ${summary.passCount}\n Skipped tests count: ${summary.skipCount}\n Failed tests count: ${summary.failCount}")
 
                     // Формирование отчета
                     allure([
