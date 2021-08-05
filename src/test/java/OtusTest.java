@@ -115,7 +115,7 @@ public class OtusTest {
     "Программу курса в сжатом виде можно увидеть на странице курса после блока с преподавателями.
     Подробную программу курса можно скачать кликнув на “Скачать подробную программу курса”.*/
    @Test
-   @Step("Check course program11")
+   @Step("Check course program1122")
    @Epic("Otus")
    @Feature("Check course program")
    @Story("Checking course program description on FAQ page")
